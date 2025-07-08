@@ -52,7 +52,8 @@ prediction=model.predict(input_scaled)
 prediction_proba=prediction[0][0]
 st.write(f'Churn Probability: {prediction_proba:.2f}')
 
-if prediction_proba>0.5:
-    print('The customer is likely to churn')
+threshold = st.slider('Churn Threshold', 0.0, 1.0, 0.5)
+if prediction_proba > threshold:
+    st.warning('🔴 Customer is likely to churn.')
 else:
-    print('The customer is not likely to churn')
+    st.success('🟢 Customer is not likely to churn.')
